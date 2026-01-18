@@ -1,0 +1,130 @@
+<section class="register-component">
+  <div class="container">
+
+    <div class="row">
+
+
+      <!--  img register here  -->
+      <!-- <div class="col-lg-6 col-sm-12 col-md-6">
+        <div class="register-img">
+          <img src="./assets/imgs/Rectangle 20.png" class="img-fluid" alt="register img">
+        </div>
+      </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- form here  -->
+
+     <div class="col-lg-12 col-sm-12 col-md-12">
+      <form class="form" [formGroup]="registerForm" (ngSubmit)="registerFormOnSubmit()">
+
+
+        <!-- form head and title  -->
+        <div class="col-12">
+          <div class="form-head">
+            <h2>Create your account </h2>
+          </div>
+        </div>
+
+
+        <!-- full name label and input  -->
+        <div class="col-12">
+          <div class="form-group">
+            <label for="fullname">FullName:</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Enter your full name"
+              formControlName="fullName" class="form-control" />
+          </div>
+        </div>
+
+
+        <!-- email label and input  -->
+        <div class="col-12">
+          <div class="form-group">
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address"
+              formControlName="email" class="form-control" />
+          </div>
+        </div>
+
+
+
+
+
+        <!-- password label and input  -->
+        <div class="col-12">
+          <div class="form-group">
+            <label for="password">Password :</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password"
+              formControlName="password" class="form-control" />
+          </div>
+        </div>
+
+
+        <!-- confirm password label and input  -->
+        <div class="col-12">
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password :</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
+              formControlName="confirmPassword" class="form-control" />
+          </div>
+        </div>
+
+
+
+        <!-- role -->
+        <div class="col-12">
+          <div class="form-group">
+            <label for="role">Role:</label>
+            <select id="role" name="role" formControlName="role" class="form-control"  >
+              <option value="">Select Role</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Student">Student</option>
+            </select>
+          </div>
+        </div>
+
+
+        <!--  submit button -->
+
+        <div class="btn-submit">
+          <button class="btn " type="submit">Register</button>
+        </div>
+
+
+
+      </form>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+  </div>
+</section>
