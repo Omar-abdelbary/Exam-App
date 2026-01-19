@@ -1,1 +1,88 @@
-<p>login works!</p>
+<section class="login-component">
+  <div class="container">
+
+
+
+    <!--  form here  -->
+    <div class="col-lg-6 col-sm-12 col-md-6">
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="loginFormSubmit()">
+
+        <!-- form head here  -->
+        <div class="col-12">
+          <div class="form-head">
+            <h2>login here:</h2>
+          </div>
+        </div>
+
+
+
+        <!-- email  -->
+
+        <div class="col-12">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email"
+              [ngClass]="{
+              'is-valid' : !loginForm.get('email')?.errors && (loginForm.get('email')?.touched ||loginForm.get('email')?.dirty) ,
+              'is-invalid' : loginForm.get('email')?.errors && (loginForm.get('email')?.dirty ||loginForm.get('email')?.touched)
+            }">
+
+
+            <!-- handling errors here  -->
+
+            @if (loginForm.get("email")?.errors && loginForm.get("email")?.touched) {
+
+            <div class="alert alert-danger">
+
+
+              @if (loginForm.get("email")?.getError("required")) {
+              <p>email is required.</p>
+              }
+
+              @else if ( loginForm.get("email")?.getError("email")) {
+              <p> please , enter valid email.</p>
+              }
+
+            </div>
+            }
+          </div>
+        </div>
+
+
+
+        <!-- password  -->
+        <div class="col-12">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="password" placeholder="Password">
+
+
+            <!-- handling errors here  -->
+
+            @if (loginForm.get("password")?.errors && loginForm.get("password")?.touched) {
+
+              <div class="alert alert-danger">
+
+                @if (loginForm.get("password")?.getError("required")) {
+                  <p>password is required.</p>
+                }
+
+                @else if (loginForm.get("password")?.getError("pattern")) {
+
+                  <p>please enter valid password. </p>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+
+        <!-- btn submit  -->
+
+        <div class="btn-submit">
+          <button class="btn btn-danger" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

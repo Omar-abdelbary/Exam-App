@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../core/environment/environment';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthService {
   private readonly _HttpClient = inject(HttpClient) ;
 
 
+  Token:any| null
 
 
 
@@ -78,6 +80,26 @@ export class AuthService {
     const params = new HttpParams().set('email', email);
 
     return this._HttpClient.get(`${environment.baseUrl}/api/Authentication/resend-confirm-email` ,{params})
+  }
+
+
+  //  save token
+  SaveToken() {
+
+    this.Token = jwtDecode(localStorage.getItem("appToken") !) ;
+  }
+
+
+
+  //  signout
+  logOut() {
+
+    if (localStorage.getItem("AppToken") !== null) {
+
+      localStorage.removeItem("AppToken") ;
+      this.Token = null ;
+
+    }
   }
 
 

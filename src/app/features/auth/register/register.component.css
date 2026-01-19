@@ -3,18 +3,9 @@
   width: 100%;
   min-height: 100vh;
   background-color: #d4ddea;
-}
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
 
-/* img register here style */
-.register-component .register-img {
-  background-color: red;
-  margin: auto !important;
-}
-.register-component .register-img .img-fluid {
-  width: 65%;
-  height: auto;
-  margin-left: 100px;
-  margin-top: 30px;
 }
 
 
@@ -31,6 +22,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 25px;
   margin-top: 30px;
+margin-bottom: 30px;
   animation: moveGradient 8s ease infinite;
   background-size: 400% 400%;
 
@@ -90,20 +82,23 @@
   /* color: #fff; */
 }
 
-/* .register-component .form .form-group .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.5); */
+
 
 .register-component .form .btn-submit {
   width: 100%;
   height: auto;
   margin-top: 100px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 
 }
 
 .register-component .form .btn-submit .btn {
-  width: 40%;
+  width: 30%;
   height: auto;
-  margin-left: 30px;
+  margin-left: 25px;
+  margin-right: 20px;
   margin-bottom: 40px;
   background: #fff; /* زرار أبيض عشان يكسر ألوان الخلفية */
     color: #9b45c2;
@@ -125,6 +120,9 @@
 
 
 
+
+
+/* responsive design for mobile phones */
 
 @media (max-width:767px) {
 

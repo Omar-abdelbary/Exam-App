@@ -1,35 +1,11 @@
 <section class="register-component">
   <div class="container">
 
-    <div class="row">
-
-
-      <!--  img register here  -->
-      <!-- <div class="col-lg-6 col-sm-12 col-md-6">
-        <div class="register-img">
-          <img src="./assets/imgs/Rectangle 20.png" class="img-fluid" alt="register img">
-        </div>
-      </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- form here  -->
 
-     <div class="col-lg-12 col-sm-12 col-md-12">
+    <div class="col-lg-12 col-sm-12 col-md-12">
       <form class="form" [formGroup]="registerForm" (ngSubmit)="registerFormOnSubmit()">
 
 
@@ -41,22 +17,66 @@
         </div>
 
 
-        <!-- full name label and input  -->
+        <!-- full name label and input and handling global erros here   -->
         <div class="col-12">
           <div class="form-group">
             <label for="fullname">FullName:</label>
             <input type="text" id="fullname" name="fullname" placeholder="Enter your full name"
-              formControlName="fullName" class="form-control" />
+              formControlName="fullName" class="form-control" [ngClass]="{
+                'is-valid' : !registerForm.get('fullName')?.errors && (registerForm.get('fullName')?.touched ||registerForm.get('fullName')?.dirty) ,
+                'is-invalid' : registerForm.get('fullName')?.errors && (registerForm.get('fullName')?.touched || registerForm.get('fullName')?.dirty)
+              }" />
+
+            <!-- validation here  -->
+            @if (registerForm.get("fullName")?.errors && registerForm.get("fullName")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (registerForm.get("fullName")?.getError("required")) {
+              <p>this is required.</p>
+              }
+
+              @else if (registerForm.get("fullName")?.getError("minlength")) {
+              <p>FullName id min length 5</p>
+              }
+
+              @else if (registerForm.get("fullName")?.getError("maxlength")) {
+              <p>FullName is max length 100</p>
+              }
+            </div>
+            }
           </div>
         </div>
 
 
-        <!-- email label and input  -->
+        <!-- email label and input and handling global erros here    -->
         <div class="col-12">
           <div class="form-group">
             <label for="email">Email :</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email address"
-              formControlName="email" class="form-control" />
+            <input type="email" id="email" name="email" placeholder="Enter your email address" formControlName="email"
+              class="form-control" [ngClass]="{
+                'is-valid' : !registerForm.get('email')?.errors && (registerForm.get('email')?.touched ||registerForm.get('email')?.dirty) ,
+                'is-invalid' : registerForm.get('email')?.errors && (registerForm.get('email')?.touched ||registerForm.get('email')?.dirty)
+              }" />
+
+
+            <!-- validation here  -->
+
+            @if (registerForm.get("email")?.errors && registerForm.get("email")?.touched) {
+            <div class="alert alert-danger">
+
+
+              @if (registerForm.get("email")?.getError("required")) {
+              <p>this is fprm control required.</p>
+              }
+
+              @else if (registerForm.get("email")?.getError("email")) {
+              <p>this is in valid email.</p>
+              }
+            </div>
+            }
+
+
           </div>
         </div>
 
@@ -64,36 +84,93 @@
 
 
 
-        <!-- password label and input  -->
+        <!-- password label and input and handling global erros here   -->
         <div class="col-12">
           <div class="form-group">
             <label for="password">Password :</label>
             <input type="password" id="password" name="password" placeholder="Enter your password"
-              formControlName="password" class="form-control" />
+              formControlName="password" class="form-control" [ngClass]="{
+                'is-valid' : !registerForm.get('password')?.errors && (registerForm.get('password')?.touched ||registerForm.get('password')?.dirty) ,
+                'is-invalid' : registerForm.get('password')?.errors && (registerForm.get('password')?.dirty ||registerForm.get
+              ('password')?.touched)
+              }" />
+
+
+            <!-- validation here  -->
+
+            @if (registerForm.get("password")?.errors && registerForm.get("password")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (registerForm.get("password")?.getError("required")) {
+              <p>this is required.</p>
+              }
+
+              @else if (registerForm.get("password")?.getError("pattern")) {
+              <p>password must be numbers only .</p>
+
+              }
+            </div>
+            }
           </div>
         </div>
 
 
-        <!-- confirm password label and input  -->
+        <!-- confirm password label and input and handling global erros here   -->
         <div class="col-12">
           <div class="form-group">
             <label for="confirmPassword">Confirm Password :</label>
             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
-              formControlName="confirmPassword" class="form-control" />
+              formControlName="confirmPassword" class="form-control" [ngClass]="{
+                'is-valid': !registerForm.get('confirmPassword')?.errors && (registerForm.get('confirmPassword')?.touched ||registerForm.get('confirmPassword')?.dirty) ,
+                'is-invalid' : registerForm.get('confirmPassword')?.errors && (registerForm.get('confirmPassword')?.touched ||registerForm.get('confirmPassword')?.dirty)
+              }" />
+
+
+            @if (registerForm.getError("mismatch") && (registerForm.get("confirmPassword")?.errors || registerForm.get("confirmPassword")?.touched)) {
+            <div class="alert alert-danger">
+
+              @if (registerForm.get("confirmPassword")?.getError("required")) {
+              <p>this is required.</p>
+              }
+
+              @else if (registerForm.getError("mismatch") && registerForm.get("confirmPassword")?.touched ) {
+              <p>Passwords do not match.</p>
+              }
+            </div>
+            }
           </div>
         </div>
 
 
 
-        <!-- role -->
+        <!-- role label and input and handling global erros here  -->
         <div class="col-12">
           <div class="form-group">
             <label for="role">Role:</label>
-            <select id="role" name="role" formControlName="role" class="form-control"  >
+            <select id="role" name="role" formControlName="role" class="form-control" [ngClass]="{
+    'is-valid': !registerForm.get('role')?.errors &&
+      (registerForm.get('role')?.touched || registerForm.get('role')?.dirty),
+    'is-invalid': registerForm.get('role')?.errors &&
+      (registerForm.get('role')?.touched || registerForm.get('role')?.dirty)
+  }">
               <option value="">Select Role</option>
               <option value="Doctor">Doctor</option>
               <option value="Student">Student</option>
+
             </select>
+
+            @if (registerForm.get("role")?.errors && registerForm.get("role")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (registerForm.get("role")?.getError("required")) {
+              <p>please select a role.</p>
+              }
+
+
+            </div>
+            }
           </div>
         </div>
 
@@ -101,7 +178,12 @@
         <!--  submit button -->
 
         <div class="btn-submit">
+          <!-- submit and send data form to backend  -->
           <button class="btn " type="submit">Register</button>
+
+
+          <!-- navagite to login component -->
+          <button class="btn btn-primary" type="button" routerLink="/login"> Login</button>
         </div>
 
 
@@ -120,8 +202,6 @@
 
 
 
-
-    </div>
 
 
 
