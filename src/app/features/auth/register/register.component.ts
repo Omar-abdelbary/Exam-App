@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -24,6 +24,9 @@ export class RegisterComponent {
   private readonly _AuthService = inject(AuthService);
   private readonly _Router = inject(Router);
 
+  //  varialbes to move from register to confirm step 2 here
+  Step: WritableSignal<number> = signal(1);
+
   // form group here and form controls
   registerForm: FormGroup = this._FormBuilder.group(
     {
@@ -36,7 +39,13 @@ export class RegisterComponent {
         ],
       ],
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*\d)[a-z\d]{8,}$/)]],
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^(?=.*[a-z])(?=.*\d)[a-z\d]{8,}$/),
+        ],
+      ],
       confirmPassword: [null, [Validators.required]],
       role: [null, [Validators.required]],
     },
@@ -55,7 +64,6 @@ export class RegisterComponent {
 
   //  form Submit function here
   registerFormOnSubmit() {
-
     // form register is valid to call register service
     if (this.registerForm.valid) {
       //  call register  from auth service here
@@ -64,10 +72,9 @@ export class RegisterComponent {
           // get response here and log it and navigate to login component .
           console.log(res);
 
-          if (res.isSuccess === "true") {
-            this._Router.navigate(['/login']);
+          if (res.message === "Registration successful. Please confirm your email & login.") {
+            this.Step.set(2);
           }
-
         },
         error: (err: HttpErrorResponse) => {
           console.log(err);
@@ -77,4 +84,50 @@ export class RegisterComponent {
       this.registerForm.markAllAsTouched();
     }
   }
+
+
+
+
+
+  //    confirm email logic here
+
+  confirmEmailForm: FormGroup = this._FormBuilder.group({
+    email: [null, [Validators.required, Validators.email]],
+    token: [null, [Validators.required]],
+  });
+
+  confirmEmailOnSubmit() {
+    // form confirm email is valid to call confirm email from auth service
+    if (this.confirmEmailForm.valid) {
+
+      const { email, token } = this.confirmEmailForm.value;
+      this._AuthService.confirmEmail(email, token).subscribe({
+        next: (res) => {
+          console.log(res);
+          this._Router.navigate(['/login']);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        },
+      });
+    } else {
+      this.confirmEmailForm.markAllAsTouched();
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+

@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../core/environment/environment';
 import { jwtDecode } from 'jwt-decode';
@@ -14,7 +14,8 @@ export class AuthService {
   private readonly _HttpClient = inject(HttpClient) ;
 
 
-  Token:any| null
+  Token:any| null ;
+  RoleApp :WritableSignal<string | null> = signal(null) ;
 
 
 
@@ -55,10 +56,11 @@ export class AuthService {
   // confirm email method
 
   confirmEmail(email: string, token: string):Observable<any> {
+
     let params = new HttpParams()
     .set('email', email)
     .set('token', token);
-    return this._HttpClient.get(`${environment.baseUrl}/api/Authentication/confirm-email` ,{ params })
+    return this._HttpClient.get(`${environment.baseUrl}/api/Authentication/confirm-email` ,{params})
   }
 
 
@@ -87,6 +89,11 @@ export class AuthService {
   SaveToken() {
 
     this.Token = jwtDecode(localStorage.getItem("appToken") !) ;
+  }
+
+  //  save Role
+  SaveRole() {
+    this.RoleApp.set(localStorage.getItem("roleApp") )  ; 
   }
 
 

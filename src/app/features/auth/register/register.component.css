@@ -82,7 +82,20 @@ margin-bottom: 30px;
   /* color: #fff; */
 }
 
+/* handling message alert design here */
 
+.register-component .form .form-group .alert {
+  width: 90%;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 25px;
+}
+
+.register-component .form .form-group .alert p {
+  font-size: 15px;
+  margin-left: 12px;
+  margin-top: 8px;
+}
 
 .register-component .form .btn-submit {
   width: 100%;
@@ -116,6 +129,11 @@ margin-bottom: 30px;
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+
+.confirmEmail-form {
+  margin-top: 105px !important;
 }
 
 

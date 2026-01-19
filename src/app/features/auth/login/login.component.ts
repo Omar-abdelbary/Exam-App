@@ -42,19 +42,26 @@ export class LoginComponent {
         next:(res)=>{
           console.log(res);
 
-          if (res.role === "Doctor" ) {
+          if (res.value.role === "Doctor" ) {
 
-            localStorage.setItem("AppToken" , res.token) ;
+            localStorage.setItem("AppToken" , res.value.accessToken) ;
+            localStorage.setItem("roleApp" , res.value.role) ;
             this._AuthService.SaveToken() ;
-            this._Router.navigate(["/home"]) ;
+            this._AuthService.SaveRole() ;
+            console.log("hello iam  a doctor");
+
+            // this._Router.navigate(["/home"]) ;
 
           }
-          // check here on role
-          else if (res.role === "Student") {
+          // check here on role student 
+          else if (res.value.role === "Student") {
 
-             localStorage.setItem("AppToken" , res.token) ;
+             localStorage.setItem("appToken" , res.value.accessToken) ;
+             localStorage.setItem("roleApp" , res.value.role) ;
             this._AuthService.SaveToken() ;
-            this._Router.navigate(["/home"]) ;
+            this._AuthService.SaveRole() ;
+            console.log("hello iam a student");
+            // this._Router.navigate(["/home"]) ;
           }
 
         },
@@ -65,6 +72,7 @@ export class LoginComponent {
         }
       })
     } else {
+      this.loginForm.markAllAsTouched();
     }
   }
 }
