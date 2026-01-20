@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgClass, provideNetlifyLoader } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +24,7 @@ export class RegisterComponent {
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _AuthService = inject(AuthService);
   private readonly _Router = inject(Router);
+  private readonly _ToastrService = inject(ToastrService) ;
 
   //  varialbes to move from register to confirm step 2 here
   Step: WritableSignal<number> = signal(1);
@@ -73,6 +75,7 @@ export class RegisterComponent {
           console.log(res);
 
           if (res.message === "Registration successful. Please confirm your email & login.") {
+            this._ToastrService.success(res.message , "Exam App" ) ;
             this.Step.set(2);
           }
         },
@@ -104,6 +107,7 @@ export class RegisterComponent {
       this._AuthService.confirmEmail(email, token).subscribe({
         next: (res) => {
           console.log(res);
+          this._ToastrService.success(res.message , "Exam App") ;
           this._Router.navigate(['/login']);
         },
         error: (err: HttpErrorResponse) => {
