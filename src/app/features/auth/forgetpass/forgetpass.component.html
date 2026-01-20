@@ -1,0 +1,175 @@
+<section class="forget-pass-component">
+  <div class="container">
+
+
+
+    <!-- step number 1 form forget pass -->
+
+    @if (Step() === 1) {
+
+
+    <!-- form here  -->
+
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <form class="form" [formGroup]="forgetPassForm" (ngSubmit)="forgetPasswordSubmit()">
+
+        <!-- form head  -->
+
+        <div class="col-12">
+          <div class="form-head">
+            <h3>Forget Password:</h3>
+          </div>
+        </div>
+
+        <!-- email -->
+        <div class="col-12">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter your email"
+              [ngClass]="{
+                'is-valid' : !forgetPassForm.get('email')?.errors && (forgetPassForm.get('email')?.touched ||forgetPassForm.get('email')?.dirty) ,
+                'is-invalid' : forgetPassForm.get('email')?.errors && (forgetPassForm.get('email')?.touched ||forgetPassForm.get('email')?.dirty)
+              }" />
+
+            @if (forgetPassForm.get("email")?.errors && forgetPassForm.get("email")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (forgetPassForm.get("email")?.getError("required")) {
+              <p>this is required.</p>
+              }
+
+              @else if (forgetPassForm.get("email")?.getError("email")) {
+              <p> enter valid email.</p>
+              }
+            </div>
+            }
+          </div>
+        </div>
+
+
+        <!-- btn submit  -->
+
+        <div class="btn-submit">
+          <button class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+    }
+    @else if (Step() === 2) {
+
+
+    <!-- form here  -->
+
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <form class="form" [formGroup]="resetPasswordForm" (ngSubmit)="resetPasswordFormSubmit()">
+
+        <!-- form head  -->
+
+        <div class="col-12">
+          <div class="form-head">
+            <h3>reset Password:</h3>
+          </div>
+        </div>
+
+
+        <!-- email and handling errors here  -->
+
+        <div class="col-12">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter your email"
+              [ngClass]="{
+                'is-valid' : !resetPasswordForm.get('email')?.errors && (resetPasswordForm.get('email')?.touched ||resetPasswordForm.get('email')?.dirty) ,
+                'is-invalid' : resetPasswordForm.get('email')?.errors && (resetPasswordForm.get('email')?.touched ||resetPasswordForm.get('dirty'))
+              }" />
+            <!-- handling all errors here  -->
+
+            @if (resetPasswordForm.get("email")?.errors && resetPasswordForm.get("email")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (resetPasswordForm.get("email")?.getError("required")) {
+              <p>this is required.</p>
+              }
+
+              @else if (resetPasswordForm.get("email")?.getError("email")) {
+              <p> enter valid email.</p>
+              }
+            </div>
+            }
+          </div>
+        </div>
+
+
+        <!--  password and handling errors here  -->
+
+        <div class="col-12">
+          <div class="form-group">
+            <label for="password">New Password:</label>
+            <input type="password" id="password" class="form-control" formControlName="newPassword"
+              placeholder="Enter your new password" [ngClass]="{
+                'is-valid' : !resetPasswordForm.get('newPassword')?.errors && (resetPasswordForm.get('newPassword')?.touched ||resetPasswordForm.get('newPassword')?.dirty) ,
+                'is-invalid' : resetPasswordForm.get('newPassword')?.errors && (resetPasswordForm.get('newPassword')?.touched ||resetPasswordForm.get('newPassword')?.dirty)
+              }" />
+
+
+            <!-- handling all errors here  -->
+
+            @if (resetPasswordForm.get("newPassword")?.errors && resetPasswordForm.get("newPassword")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (resetPasswordForm.get("newPassword")?.getError("required")) {
+              <p>this is required.</p>
+              }
+
+              @else if (resetPasswordForm.get("newPassword")?.getError("pattern")) {
+              <p> enter valid email.</p>
+              }
+            </div>
+            }
+          </div>
+        </div>
+
+        <!-- token here  -->
+        <div class="col-12">
+          <div class="form-group">
+            <label for="token">Token:</label>
+            <input type="text" id="token" class="form-control" formControlName="token"
+              placeholder="Enter the token sent to your email"
+              [ngClass]="{
+                'is-valid' : !resetPasswordForm.get('token')?.errors && (resetPasswordForm.get('token')?.touched ||resetPasswordForm.get('token')?.dirty) ,
+                'is-invalid' : resetPasswordForm.get('token')?.errors && (resetPasswordForm.get('token')?.touched ||resetPasswordForm.get('token')?.dirty)
+              }"
+               />
+
+
+                   <!-- handling all errors here  -->
+
+            @if (resetPasswordForm.get("token")?.errors && resetPasswordForm.get("token")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (resetPasswordForm.get("token")?.getError("required")) {
+              <p>this is required.</p>
+              }
+
+
+            </div>
+            }
+          </div>
+        </div>
+
+
+        <!-- btn submit  -->
+        <div class="btn-submit">
+          <button class="btn btn-primary" type="submit">submit</button>
+        </div>
+
+      </form>
+    </div>
+
+    }
+  </div>
+</section>

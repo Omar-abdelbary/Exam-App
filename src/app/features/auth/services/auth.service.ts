@@ -36,9 +36,8 @@ export class AuthService {
 
   // forget password method
 
-  forgetPassword(email : string):Observable<any> {
-    const params = new HttpParams().set('email', email);
-    return this._HttpClient.get(`${environment.baseUrl}/api/Authentication/forget-password` ,{params})
+  forgetPassword(forgetPassData : object):Observable<any> {
+    return this._HttpClient.post(`${environment.baseUrl}/api/Authentication/forget-password`  , forgetPassData)
   }
 
 
@@ -93,7 +92,7 @@ export class AuthService {
 
   //  save Role
   SaveRole() {
-    this.RoleApp.set(localStorage.getItem("roleApp") )  ; 
+    this.RoleApp.set(localStorage.getItem("roleApp") )  ;
   }
 
 

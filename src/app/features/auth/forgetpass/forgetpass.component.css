@@ -1,0 +1,150 @@
+/* start component */
+.forget-pass-component {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #d4ddea;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+}
+
+/*  style form forget-pass here  */
+
+.forget-pass-component .form {
+  width: 50%;
+  height: auto;
+  margin: auto;
+  background: linear-gradient(-45deg, #9b45c2, #e89836, #7a2d9a, #d18120);
+  border: 1px solid #000000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  margin-top: 110px;
+  margin-bottom: 30px;
+  animation: moveGradient 8s ease infinite;
+  background-size: 400% 400%;
+}
+
+/* حركة الألوان جوة الفورم */
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.forget-pass-component .form .form-header {
+  width: 100%;
+  height: auto;
+}
+
+.forget-pass-component .form .form-head h3 {
+  text-align: center;
+  margin-top: 30px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 22px;
+  text-decoration: underline;
+  margin-bottom: 25px;
+}
+
+.forget-pass-component .form .form-group {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.forget-pass-component .form .form-group label {
+  width: 100%;
+  height: auto;
+  padding-left: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.forget-pass-component .form .form-group .form-control {
+  width: 90%;
+  height: auto;
+  margin-left: 25px;
+  background: rgba(255, 255, 255, 0.15);
+  /* color: #fff; */
+}
+
+/* handling message alert design here */
+
+.forget-pass-component .form .form-group .alert {
+  width: 90%;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 25px;
+}
+
+.forget-pass-component .form .form-group .alert p {
+  font-size: 15px;
+  margin-left: 12px;
+  margin-top: 8px;
+}
+
+.forget-pass-component .form .btn-submit {
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.forget-pass-component .form .btn-submit .btn {
+  width: 30%;
+  height: auto;
+  margin-left: 25px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  background: #fff; /* زرار أبيض عشان يكسر ألوان الخلفية */
+  color: #9b45c2;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.forget-pass-component .form .btn-submit .btn:hover {
+  background: #333; /* يقلب أسود شيك عند الهوفر */
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.confirmEmail-form {
+  margin-top: 105px !important;
+}
+
+/* responsive design for mobile phones */
+
+@media (max-width: 767px) {
+  .forget-pass-component .form {
+    width: 100%;
+  }
+}
+
+/* responsive design tablet */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .forget-pass-component .form {
+    width: 100%;
+  }
+}
