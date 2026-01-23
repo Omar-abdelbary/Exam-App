@@ -1,0 +1,81 @@
+<section class="changePass-component">
+
+  <div class="container">
+
+
+    <!-- form here  -->
+
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <form class="form" [formGroup]="changePassForm" (ngSubmit)="changePassSubmit()">
+
+        <!-- form head -->
+        <div class="col-12">
+          <div class="form-head">
+            <h3>Change Pass :</h3>
+          </div>
+        </div>
+
+
+        <!-- current pass here -->
+
+        <div class="col-12">
+          <div class="form-group">
+            <label for="currentpass">Current Pass :</label>
+            <input type="password" id="currentpass" class="form-control" placeholder="enter current pass here"
+              formControlName="currentPassword" [ngClass]="{
+              'is-valid' : !changePassForm.get('currentPassword')?.errors && (changePassForm.get('currentPassword')?.dirty ||changePassForm.get('currentPassword')?.touched) ,
+              'is-invalid' : changePassForm.get('currentPassword')?.errors && (changePassForm.get('currentPassword')?.touched ||changePassForm.get('currentPassword')?.dirty)
+            }">
+
+            <!-- handling all errrors  here -->
+
+            @if (changePassForm.get("currentPassword")?.errors && changePassForm.get("currentPassword")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (changePassForm.get("currentPassword")?.getError("required")) {
+              <p> this is required</p>
+              }
+
+              @else if (changePassForm.get("currentPassword")?.getError("pattern")) {
+              <p>enter valid password.</p>
+              }
+            </div>
+            }
+          </div>
+        </div>
+
+
+        <!-- new password here  -->
+
+        <div class="col-12">
+          <div class="form-group">
+            <label for="newpass">New Password :</label>
+            <input type="password" id="newpass" class="form-control" placeholder="enter new password here "
+              formControlName="newPassword" [ngClass]="{
+              'is-valid' : !changePassForm.get('newPassword')?.errors && (changePassForm.get('newPassword')?.dirty ||changePassForm.get('newPassword')?.touched) ,
+              'is-invalid' : changePassForm.get('newPassword')?.errors && (changePassForm.get('newPassword')?.touched ||changePassForm.get('newPassword')?.dirty)
+             }">
+
+
+            <!-- handling all errros here  -->
+
+            @if (changePassForm.get("newPassword")?.errors && changePassForm.get("newPassword")?.touched) {
+
+            <div class="alert alert-danger">
+
+              @if (changePassForm.get("newPassword")?.getError("required")) {
+              <p>this is required.</p>
+              }
+
+              @else if (changePassForm.get("newPassword")?.getError("pattern")) {
+              <p>enter valid password.</p>
+              }
+            </div>
+            }
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

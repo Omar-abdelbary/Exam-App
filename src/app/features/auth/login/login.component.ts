@@ -51,7 +51,8 @@ export class LoginComponent {
             localStorage.setItem("roleApp" , res.data.role) ;
             this._AuthService.SaveToken() ;
             this._AuthService.SaveRole() ;
-           
+            this._Router.navigate(["/profile"]) ;
+
 
             // this._Router.navigate(["/home"]) ;
 
@@ -65,7 +66,7 @@ export class LoginComponent {
             this._AuthService.SaveToken() ;
             this._AuthService.SaveRole() ;
 
-            // this._Router.navigate(["/home"]) ;
+            this._Router.navigate(["/profile"]) ;
           }
 
         },

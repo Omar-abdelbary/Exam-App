@@ -7,7 +7,8 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
 
   req = req.clone({
     setHeaders :{
-      "Authorization": "Bearer your-token-here"
+      Authorization: `Bearer ${localStorage.getItem("appToken") }`,
+      'Content-Type': 'application/json' ,
     }
   })
 
