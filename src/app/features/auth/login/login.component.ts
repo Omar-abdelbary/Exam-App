@@ -9,6 +9,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgClass } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent {
   private readonly _Router = inject(Router);
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _AuthService = inject(AuthService);
+  private readonly _ToastrService = inject(ToastrService) ;
 
   // create login form here
 
@@ -40,27 +42,29 @@ export class LoginComponent {
 
       this._AuthService.login(this.loginForm.value).subscribe({
         next:(res)=>{
-          console.log(res);
+          // console.log(res);
 
-          if (res.value.role === "Doctor" ) {
+          if (res.data.role === "Doctor" ) {
 
-            localStorage.setItem("AppToken" , res.value.accessToken) ;
-            localStorage.setItem("roleApp" , res.value.role) ;
+            localStorage.setItem("AppToken" , res.data.accessToken) ;
+            this._ToastrService.success(res.message , "ExamApp")
+            localStorage.setItem("roleApp" , res.data.role) ;
             this._AuthService.SaveToken() ;
             this._AuthService.SaveRole() ;
-            console.log("hello iam  a doctor");
+           
 
             // this._Router.navigate(["/home"]) ;
 
           }
           // check here on role student
-          else if (res.value.role === "Student") {
+          else if (res.data.role === "Student") {
 
-             localStorage.setItem("appToken" , res.value.accessToken) ;
-             localStorage.setItem("roleApp" , res.value.role) ;
+             localStorage.setItem("appToken" , res.data.accessToken) ;
+             this._ToastrService.success(res.message , "ExamApp") ;
+             localStorage.setItem("roleApp" , res.data.role) ;
             this._AuthService.SaveToken() ;
             this._AuthService.SaveRole() ;
-            console.log("hello iam a student");
+
             // this._Router.navigate(["/home"]) ;
           }
 

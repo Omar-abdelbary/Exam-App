@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgClass } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgetpass',
@@ -22,6 +23,7 @@ export class ForgetpassComponent {
   private readonly _formBuilder = inject(FormBuilder) ;
   private readonly _router = inject(Router) ;
   private readonly _AuthService = inject(AuthService) ;
+  private readonly _ToastrService = inject(ToastrService) ;
 
 
   //  all veriables here to use in components
@@ -43,8 +45,14 @@ export class ForgetpassComponent {
 
       this._AuthService.forgetPassword(this.forgetPassForm.value).subscribe({
         next:(res)=>{
-          console.log(res);
-          this.Step.set(2) ;
+          // console.log(res);
+
+          if (res.isSuccess === true) {
+
+            this._ToastrService.success(res.message , "Exam App" )
+            this.Step.set(2) ;
+          }
+
 
         },
 
@@ -78,7 +86,13 @@ resetPasswordFormSubmit() {
     this._AuthService.resetPassword(this.resetPasswordForm.value).subscribe({
       next:(res)=>{
 
-        console.log(res);
+        // console.log(res);
+
+        if (res.isSuccess === true ) {
+
+          this._ToastrService.success(res.message , "Exam App") ;
+          this._router.navigate(["/login"]) ;
+        }
 
       },
 

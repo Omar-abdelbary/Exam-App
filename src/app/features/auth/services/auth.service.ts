@@ -19,17 +19,24 @@ export class AuthService {
 
 
 
+  //  logOut
+
+  // SignUp():Observable<any> {
+  //   return this._HttpClient.post(`${environment.baseUrl}/api/auth/logout` , )
+  // }
+
+
   // register method
 
   register(registerData: object):Observable<any> {
-    return this._HttpClient.post(`${environment.baseUrl}/api/Authentication/register` , registerData)
+    return this._HttpClient.post(`${environment.baseUrl}/api/auth/register` , registerData)
   }
 
 
   // login method
 
   login(loginData: object):Observable<any> {
-    return this._HttpClient.post(`${environment.baseUrl}/api/Authentication/login` , loginData)
+    return this._HttpClient.post(`${environment.baseUrl}/api/auth/login` , loginData)
   }
 
 
@@ -37,7 +44,7 @@ export class AuthService {
   // forget password method
 
   forgetPassword(forgetPassData : object):Observable<any> {
-    return this._HttpClient.post(`${environment.baseUrl}/api/Authentication/forget-password`  , forgetPassData)
+    return this._HttpClient.post(`${environment.baseUrl}/api/auth/password/forgot`  , forgetPassData)
   }
 
 
@@ -46,8 +53,18 @@ export class AuthService {
 
   resetPassword(resetPassData: object):Observable<any> {
 
-    return this._HttpClient.post(`${environment.baseUrl}/api/Authentication/reset-password` ,
+    return this._HttpClient.post(`${environment.baseUrl}/api/auth/password/reset` ,
       resetPassData
+    )
+  }
+
+
+
+  // change password
+
+  changePass(changePassData:object):Observable<any> {
+    return this._HttpClient.post(`${environment.baseUrl}/api/auth/password/change` ,
+      changePassData
     )
   }
 
@@ -59,7 +76,7 @@ export class AuthService {
     let params = new HttpParams()
     .set('email', email)
     .set('token', token);
-    return this._HttpClient.get(`${environment.baseUrl}/api/Authentication/confirm-email` ,{params})
+    return this._HttpClient.get(`${environment.baseUrl}/api/auth/confirm-email` ,{params})
   }
 
 
@@ -80,7 +97,7 @@ export class AuthService {
 
     const params = new HttpParams().set('email', email);
 
-    return this._HttpClient.get(`${environment.baseUrl}/api/Authentication/resend-confirm-email` ,{params})
+    return this._HttpClient.get(`${environment.baseUrl}/api/auth/email/resend-confirmation` ,{params})
   }
 
 
@@ -107,6 +124,9 @@ export class AuthService {
 
     }
   }
+
+
+
 
 
 }

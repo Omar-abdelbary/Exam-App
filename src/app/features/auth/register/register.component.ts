@@ -71,10 +71,10 @@ export class RegisterComponent {
       //  call register  from auth service here
       this._AuthService.register(this.registerForm.value).subscribe({
         next: (res) => {
-          // get response here and log it and navigate to login component .
-          console.log(res);
+          // get response here and log it  .
 
-          if (res.message === "Registration successful. Please confirm your email & login.") {
+
+          if (res.isSuccess === true) {
             this._ToastrService.success(res.message , "Exam App" ) ;
             this.Step.set(2);
           }
@@ -106,7 +106,7 @@ export class RegisterComponent {
       const { email, token } = this.confirmEmailForm.value;
       this._AuthService.confirmEmail(email, token).subscribe({
         next: (res) => {
-          console.log(res);
+          // console.log(res);
           this._ToastrService.success(res.message , "Exam App") ;
           this._Router.navigate(['/login']);
         },
