@@ -11,7 +11,7 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [
     ReactiveFormsModule ,
-    NgClass 
+    NgClass
 
   ],
   templateUrl: './changepass.component.html',
@@ -49,6 +49,9 @@ export class ChangepassComponent {
         }
       })
 
+    }
+    else {
+      this.changePassForm.markAllAsTouched() ;
     }
   }
 

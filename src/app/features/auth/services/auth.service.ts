@@ -129,16 +129,16 @@ export class AuthService {
 
   //  refresh token
 
-  refreshToken():Observable<any> {
-    return this._HttpClient.post(`${environment.baseUrl}/api/auth/token/refresh`)
-  }
+  // refreshToken():Observable<any> {
+  //   return this._HttpClient.post(`${environment.baseUrl}/api/auth/token/refresh`)
+  // }
 
 
   // revoke token
 
-  revokeToken():Observable<any> {
-    return this._HttpClient.post(`${environment.baseUrl}/api/auth/token/revoke`)
-  }
+  // revokeToken():Observable<any> {
+  //   return this._HttpClient.post(`${environment.baseUrl}/api/auth/token/revoke`)
+  // }
 
 
 
