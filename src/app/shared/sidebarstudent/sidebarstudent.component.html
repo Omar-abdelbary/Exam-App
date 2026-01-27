@@ -1,0 +1,57 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="getSidebarMode()" [opened]="isSidebarOpen()">
+
+    <!-- Sidebar Header -->
+    <div class="sidebar-header">
+      <div class="logo-section">
+        <mat-icon class="logo-icon">school</mat-icon>
+        <h2 class="app-title">Exam Portal</h2>
+      </div>
+    </div>
+
+    <!-- Navigation List -->
+    <mat-nav-list class="nav-list">
+      @for (item of navItems; track item.route) {
+      <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link" (click)="onNavItemClick()"
+        class="nav-item">
+        <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+        <span class="nav-label">{{ item.label }}</span>
+      </a>
+      }
+    </mat-nav-list>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <button mat-button class="theme-toggle-btn" (click)="toggleTheme()">
+        <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        <span>{{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}</span>
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content>
+    <!-- Toolbar -->
+    <mat-toolbar class="toolbar">
+      <button type="button" aria-label="Toggle sidebar" mat-icon-button class="menu-button" (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span class="toolbar-title">Student Dashboard</span>
+
+      <span class="spacer"></span>
+
+      <!-- Theme toggle in toolbar (visible on all screens) -->
+      <button mat-icon-button class="toolbar-theme-toggle" (click)="toggleTheme()"
+        [attr.aria-label]="isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+        <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <!-- Page Content -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

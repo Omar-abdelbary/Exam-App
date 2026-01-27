@@ -1,0 +1,378 @@
+// ========================================
+// Variables & Color Palette
+// ========================================
+
+:host {
+  // Light Mode Colors
+  --bg-primary-light: #ffffff;
+  --bg-secondary-light: #f5f7fa;
+  --text-primary-light: #1a202c;
+  --text-secondary-light: #4a5568;
+  --border-light: #e2e8f0;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --accent-light: #3b82f6;
+  --accent-hover-light: #2563eb;
+  --active-bg-light: #eff6ff;
+
+  // Dark Mode Colors
+  --bg-primary-dark: #1a202c;
+  --bg-secondary-dark: #2d3748;
+  --text-primary-dark: #f7fafc;
+  --text-secondary-dark: #cbd5e0;
+  --border-dark: #4a5568;
+  --shadow-dark: rgba(0, 0, 0, 0.3);
+  --accent-dark: #60a5fa;
+  --accent-hover-dark: #3b82f6;
+  --active-bg-dark: #2c5282;
+
+  // Default to light mode
+  --bg-primary: var(--bg-primary-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --border-color: var(--border-light);
+  --shadow-color: var(--shadow-light);
+  --accent-color: var(--accent-light);
+  --accent-hover: var(--accent-hover-light);
+  --active-bg: var(--active-bg-light);
+
+  // Spacing & Sizing
+  --sidebar-width: 280px;
+  --toolbar-height: 64px;
+  --border-radius: 12px;
+  --transition-speed: 0.3s;
+}
+
+// ========================================
+// Dark Mode Theme
+// ========================================
+
+:host-context(.dark-theme) {
+  --bg-primary: var(--bg-primary-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --border-color: var(--border-dark);
+  --shadow-color: var(--shadow-dark);
+  --accent-color: var(--accent-dark);
+  --accent-hover: var(--accent-hover-dark);
+  --active-bg: var(--active-bg-dark);
+}
+
+// ========================================
+// Container
+// ========================================
+
+.sidenav-container {
+  height: 100vh;
+  background-color: var(--bg-secondary);
+  transition: background-color var(--transition-speed) ease;
+}
+
+// ========================================
+// Sidebar
+// ========================================
+
+.sidenav {
+  width: var(--sidebar-width);
+  background-color: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  box-shadow: 2px 0 8px var(--shadow-color);
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+
+  // Sidebar Header
+  .sidebar-header {
+    padding: 24px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      
+      .logo-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+        color: #ffffff;
+      }
+      
+      .app-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+
+  // Navigation List
+  .nav-list {
+    flex: 1;
+    padding: 16px 0;
+    overflow-y: auto;
+    
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 3px;
+      
+      &:hover {
+        background: var(--text-secondary);
+      }
+    }
+  }
+
+  // Navigation Items
+  .nav-item {
+    margin: 4px 12px;
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+
+    // Hover effect
+    &:hover {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      transform: translateX(4px);
+      
+      .nav-icon {
+        color: var(--accent-color);
+        transform: scale(1.1);
+      }
+    }
+
+    // Active state
+    &.active-link {
+      background-color: var(--active-bg);
+      color: var(--accent-color);
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--accent-color), var(--accent-hover));
+        border-radius: 0 4px 4px 0;
+      }
+      
+      .nav-icon {
+        color: var(--accent-color);
+      }
+    }
+
+    .nav-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-label {
+      flex: 1;
+    }
+  }
+
+  // Sidebar Footer
+  .sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid var(--border-color);
+    
+    .theme-toggle-btn {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: var(--border-radius);
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+      
+      &:hover {
+        background-color: var(--bg-secondary);
+        color: var(--accent-color);
+      }
+    }
+  }
+}
+
+// ========================================
+// Toolbar
+// ========================================
+
+.toolbar {
+  height: var(--toolbar-height);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  padding: 0 16px;
+  transition: all var(--transition-speed) ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .menu-button {
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: var(--bg-secondary);
+      transform: rotate(90deg);
+    }
+  }
+
+  .toolbar-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar-theme-toggle {
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: var(--bg-secondary);
+      color: var(--accent-color);
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ========================================
+// Content Area
+// ========================================
+
+.content {
+  padding: 24px;
+  min-height: calc(100vh - var(--toolbar-height));
+  background-color: var(--bg-secondary);
+  transition: background-color var(--transition-speed) ease;
+}
+
+// ========================================
+// Responsive Design
+// ========================================
+
+@media (max-width: 768px) {
+  .sidenav {
+    width: 280px;
+  }
+
+  .toolbar {
+    padding: 0 12px;
+    
+    .toolbar-title {
+      font-size: 18px;
+    }
+  }
+
+  .content {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidenav {
+    width: 260px;
+    
+    .sidebar-header {
+      padding: 20px 16px;
+      
+      .logo-section {
+        .logo-icon {
+          font-size: 28px;
+          width: 28px;
+          height: 28px;
+        }
+        
+        .app-title {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .content {
+    padding: 12px;
+  }
+}
+
+// ========================================
+// Animations
+// ========================================
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-item {
+  animation: slideIn 0.3s ease forwards;
+  
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+}
+
+// ========================================
+// Material Overrides
+// ========================================
+
+::ng-deep {
+  .mat-drawer-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .mat-drawer-transition .mat-drawer-content {
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+}

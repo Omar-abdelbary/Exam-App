@@ -9,11 +9,12 @@ import { headerInterceptor } from './core/interceptors/header.interceptor';
 import { errorsInterceptor } from './core/interceptors/errors.interceptor';
 import { loadingScreenInterceptor } from './core/interceptors/loading-screen.interceptor';
 import { provideToastr } from 'ngx-toastr';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes , withInMemoryScrolling()), provideClientHydration() ,
     provideAnimations() ,
     provideHttpClient(withFetch() , withInterceptors([headerInterceptor , errorsInterceptor , loadingScreenInterceptor]) )  ,
-    provideToastr() ,
+    provideToastr(), provideAnimationsAsync() ,
   ]
 };
